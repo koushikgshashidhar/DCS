@@ -3,10 +3,7 @@ package com.demo.Singleton;
 public class Singleton_v1 {
     // Private static instance of the class
     private static Singleton_v1 instance;
-public static void main(String []args)
-{
 
-}
     // Private constructor to prevent instantiation
     private Singleton_v1() {}
 
