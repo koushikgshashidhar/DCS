@@ -1,17 +1,5 @@
-package com.demo.Strategy.v1;
+package com.demo.Strategy.v3;
 
-//Strategy Pattern
-// The Strategy Pattern is a behavioral design pattern that enables selecting an algorithm's behavior at runtime.
-// It defines a family of algorithms, encapsulates each one, and makes them interchangeable.
-//lets take simuDuck as an example
-// so we have abstract class Duck and concrete classes that extend Duck class
-//the ask is to introduce fly() behaviour
-//consider if introduce fly() method in Duck base class
-//but this is not a good idea because not all ducks can fly
-//for example, rubber duck cannot fly
-// but can we implement fly() method in Duck class and override it in subclasses?
-// The answer is yes, but it is not a good design.
-// any new duck that cannot fly will have to override the fly() method and provide an empty implementation.
 // what if we have interface Flyable and only ducks that can fly will implement this interface
 // but this is not a good design either as we have to implement the fly() method in all subclasses
 //and we might have duplicate code in all subclasses and no reusability
@@ -21,7 +9,7 @@ package com.demo.Strategy.v1;
 // and we will have a reference to the Flyable interface in the Duck class
 // so we program to an interface and not to an implementation
 // so we can have different implementations of the Flyable interface and we can change the implementation at runtime
-//  composition over inheritance : as the flying behaviour code is not a part of the duck class which brings more flexibility
+//  composition over inheritance : as the flying behaviour is not a part of the duck class which brings more flexibility
 // we can concrete duck classes derived from Duck class and use composition to add flying behaviour
 //so the concrete duck can change its flying behaviour at runtime
 //so this is the strategy pattern
@@ -33,15 +21,25 @@ package com.demo.Strategy.v1;
 //what if we want to chang flying behaviour concrete class,then we change only at one place
 
 
-public class Strategy_v1 {
+interface Flyable
+{
+    void fly();
+}
+
+public class Strategy_v3 {
     public static void main(String[] args) {
-        Duck duck = new MallardDuck();
+        MallardDuck duck = new MallardDuck();
         duck.quack();
         duck.fly();
 
-        Duck rubberDuck = new RubberDuck();
+// we cant call fly() method on duck object as it is not implemented in Duck class
+//        Duck duck = new MallardDuck();
+//        duck.quack();
+//        duck.fly();
+
+        RubberDuck rubberDuck = new RubberDuck();
         rubberDuck.quack();
-        rubberDuck.fly();
+//        rubberDuck.fly(); // this will give error as rubber duck cannot fly
     }
 }
 
@@ -52,16 +50,29 @@ abstract class Duck
         System.out.println("I can quack");
     }
 
-    public void  fly()
+
+}
+
+class MallardDuck extends Duck implements Flyable
+{
+    @Override
+    public void fly()
     {
-    System.out.println("I can fly");
+        System.out.println("I can fly");
     }
 }
 
-class MallardDuck extends Duck
-{
-}
 
 class RubberDuck extends Duck
 {
+}
+
+
+class BlueDuck extends Duck implements Flyable {
+
+    @Override
+    public void  fly()
+    {
+        System.out.println("I can fly");
+    }
 }
