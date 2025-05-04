@@ -16,7 +16,7 @@ package com.demo.Strategy.v1;
 // but this is not a good design either as we have to implement the fly() method in all subclasses
 //and we might have duplicate code in all subclasses and no reusability
 // what if there is a small change in the fly() method, we have to change it in all subclasses
-//so lets separate things that vary from those that stay the same
+//so lets separate things that vary from those that stay the same,encapsulate that vary/change
 // so lets have concrete classes that implement the Flyable interface
 // and we will have a reference to the Flyable interface in the Duck class
 // so we program to an interface and not to an implementation
